@@ -16,7 +16,7 @@ function main() {
     const argv = process.argv;
     if (argv.length == 3) {
         const serverPath = argv[2];
-        const serverProcess = childProcess.spawn(serverPath);
+        const serverProcess = childProcess.spawn(serverPath,[], {stdio:['pipe','pipe','inherit']});
         const connection = rpc.createMessageConnection(
             new rpc.StreamMessageReader(serverProcess.stdout),
             new rpc.StreamMessageWriter(serverProcess.stdin)
